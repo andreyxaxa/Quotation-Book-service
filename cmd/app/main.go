@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/andreyxaxa/Quotation-Book-service/config"
 	"github.com/andreyxaxa/Quotation-Book-service/internal/app"
@@ -10,8 +11,10 @@ import (
 
 func main() {
 	// Load .env
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("No .env file found")
+	if _, err := os.Stat(".env"); err == nil {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("No .env file found")
+		}
 	}
 
 	// Configuration
